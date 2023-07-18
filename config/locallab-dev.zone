@@ -1,0 +1,16 @@
+$TTL 1d
+
+$ORIGIN locallab.dev.
+
+@         IN      SOA   ns.locallab.dev. info.locallab.dev. (
+                          2023071800 ; serial number
+                          12h        ; refresh
+                          15m        ; update retry
+                          3w         ; expiry
+                          2h         ; minimum
+                        )
+          IN      NS   ns.locallab.dev.
+ns        IN      A    172.16.238.250
+
+; -- below dns records
+test1     IN      A    172.16.238.20

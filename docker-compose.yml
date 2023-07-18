@@ -1,0 +1,32 @@
+version: "3.6"
+
+services:
+  bind9:
+    container_name: nameserver
+    image: ubuntu/bind9:9.16-20.04_beta
+    environment:
+      - TZ=Asia/Seoul
+      - BIND9_USER=root
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    restart: unless-stopped
+    volumes:
+      - ./config:/etc/bind
+    networks:
+      dnslab:
+        ipv4_address: 172.16.238.250
+  debug-container:
+    container_name: debug-container
+    image: nicolaka/netshoot
+    command: "sleep infinity"
+    networks:
+      dnslab:
+        ipv4_address: 172.16.238.10
+
+networks:
+  dnslab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
